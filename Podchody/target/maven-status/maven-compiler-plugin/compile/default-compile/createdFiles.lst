@@ -1,0 +1,9 @@
+com\mycompany\podchody\Exams.class
+com\mycompany\podchody\JAXRSConfiguration.class
+com\mycompany\podchody\Games.class
+com\mycompany\podchody\Players.class
+com\mycompany\podchody\Tasks.class
+com\mycompany\podchody\GamesServlet.class
+com\mycompany\podchody\resources\JavaEE8Resource.class
+com\mycompany\podchody\TaskServlet.class
+com\mycompany\podchody\EmxamsServlet.class
