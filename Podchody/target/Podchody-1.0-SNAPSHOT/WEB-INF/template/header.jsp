@@ -9,7 +9,7 @@
       <div id="wrapper" class="animate">
     <nav class="navbar header-top fixed-top navbar-expand-lg  navbar-dark bg-dark">
       <span class="navbar-toggler-icon leftmenutrigger"></span>
-      <a class="navbar-brand" href="#">Gry Miejskie</a>
+      <a class="navbar-brand" href="home">Gry Miejskie</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -17,28 +17,28 @@
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav animate side-nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">Strona główna
+            <a class="nav-link" href="home">Strona główna
               <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Testy</a>
+            <a class="nav-link" href="exams">Testy</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Gry</a>
+            <a class="nav-link" href="games">Gry</a>
           </li>
         </ul>
         <ul class="navbar-nav ml-md-auto d-md-flex">
           <li class="nav-item">
-            <a class="nav-link" href="#">Strona główna
+            <a class="nav-link" href="home">Strona główna
               <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Testy</a>
+            <a class="nav-link" href="exams">Testy</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Gry</a>
+            <a class="nav-link" href="games">Gry</a>
           </li>
         </ul>
       </div>

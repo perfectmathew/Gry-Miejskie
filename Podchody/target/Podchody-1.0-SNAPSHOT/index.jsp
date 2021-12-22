@@ -21,17 +21,16 @@
   </div>
 </div>
     </a>
- <a href="games" />
-  <div class="card 2">
+<a href="games">
+<div class="card 2">
   <div class="card_image">
     <img src="https://cdn.blackmilkclothing.com/media/wysiwyg/Wallpapers/PhoneWallpapers_FloralCoral.jpg" />
-    </div>
+   </div>
   <div class="card_title title-white">
     <p>Gry</p>
   </div>
+</div></a>
 </div>
-</div>
-       </a>
 
     </body>
 </html>

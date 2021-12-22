@@ -20,9 +20,21 @@
         <servlet-name>AddGame</servlet-name>
         <servlet-class>com.mycompany.podchody.AddGame</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GamesFunction</servlet-name>
+        <servlet-class>com.mycompany.podchody.GamesFunction</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>com.mycompany.podchody.HomeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExamFunction</servlet-name>
+        <servlet-class>com.mycompany.podchody.ExamFunction</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TaskServlet</servlet-name>
-        <url-pattern>/tasks</url-pattern>
+        <url-pattern>/e</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ExamsServlet</servlet-name>
@@ -39,6 +51,21 @@
     <servlet-mapping>
         <servlet-name>AddGame</servlet-name>
         <url-pattern>/games&amp;action=add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GamesFunction</servlet-name>
+        <url-pattern>/function</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>home</welcome-file>
+    </welcome-file-list>
+    <servlet-mapping>
+        <servlet-name>ExamFunction</servlet-name>
+        <url-pattern>/efunction</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

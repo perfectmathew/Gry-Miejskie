@@ -1,48 +1,58 @@
 
+
+<%@page import="com.mycompany.podchody.Tasks"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.mycompany.podchody.Exams"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
+       <head>
        <%@include file="/WEB-INF/template/header.jsp"%>
        <style><%@include file="/WEB-INF/css/main.css"%></style>
        <script><%@include file="/WEB-INF/js/functions.js"%></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Gry miejskie</title>
+        <title>Zarządzanie Testami | Gry miejskie</title>
     </head>
     <body>
-<div class="container">
+        <% String examid;
+        examid = (String)request.getAttribute("IDOFEXAM");
+            %>
+        <div class="container">
   <div class="table-wrapper">
     <div class="table-title">
       <div class="row">
         <div class="col-sm-6">
-          <h2>Zarządzaj <b>Testami</b></h2>
+          <h2>TEST / <b>Pytania</b></h2>
         </div>
         <div class="col-sm-6">
-          <a id="adde"  class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Dodaj nowy test</span></a>
+          <a id="adde"  class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Dodaj nowe pytanie</span></a>
         </div>
       </div>
     </div>
     <table class="table table-striped table-hover">
       <thead>
         <tr>
-          <th>Nazwa</th>
-          <th>Ilość pytań</th>
-          <th>Próg zdawalności</th>
+          <th>Treść</th>
+          <th>Odpowiedź A</th>
+          <th>Odpowiedź B</th>
+          <th>Odpowiedź C</th>
+          <th>Odpowiedź D</th>
+          <th>Poprawna odpowiedź</th>
           <th>Akcje</th>
         </tr>
       </thead>
       <tbody>
            <%
-        ArrayList<Exams> examlist = (ArrayList<Exams>) request.getAttribute("listexams");
-             for(Exams exam : examlist){   %>
+        ArrayList<Tasks> tasklist = (ArrayList<Tasks>) request.getAttribute("taskslist");
+             for(Tasks task : tasklist){   %>
         <tr>
-          <td><%= exam.getNazwa() %></td>
-          <td><%= exam.getIlosc() %></td>
-          <td><%= exam.getProg() %></td>
+          <td><%= task.getTresc() %></td>
+          <td><%= task.getOdpA() %></td>
+          <td><%= task.getOdpB() %></td>
+          <td><%= task.getOdpC() %></td>
+          <td><%= task.getOdpD() %></td>
+          <td><%= task.getPoprawanaOdp() %></td>
           <td>
-              <a href="e?id=<%= exam.getID() %>" class="edit" data-toggle="modal"><i class="fa fa-pencil-square" data-toggle="tooltip" title="Edit"></i></a>
+              <a class="edit" data-toggle="modal"><i class="fa fa-pencil-square" data-toggle="tooltip" title="Edit"></i></a>
             <a  class="delete" data-toggle="modal"><i class="fa fa-trash" data-toggle="tooltip" title="Delete"></i></a>
           </td>
         </tr>
@@ -55,31 +65,52 @@
 <div id="addExam" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
-        <form method="post" action="efunction?type=addexam">
+        <form method="post" action="efunction?type=addquestion">
         <div class="modal-header">
-          <h4 class="modal-title">Stwórz nowy egzamin</h4>
+          <h4 class="modal-title">Dodaj pytanie</h4>
           <button type="button" id="closemodal" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
         <div class="modal-body">
+            <input type="hidden" name="examid" id="examid" value="<%= examid %>">
           <div class="form-group">
-            <label>Nazwa</label>
-            <input type="text" class="form-control" name="name" id="name" required>
+            <label>Tresc</label>
+            <input type="text" class="form-control" name="tresc" id="tresc" required>
           </div>
           <div class="form-group">
-            <label>Próg zaliczenia</label>
-            <input type="number" name="prog" id="prog" min="0.00" step="0.10" max="100.00" class="form-control" required>
+            <label>Odpowiedź A</label>
+            <input type="text" name="OdpA" id="OdpA" class="form-control" required>
           </div>
+           <div class="form-group">
+            <label>Odpowiedź B</label>
+            <input type="text" name="OdpB" id="OdpB" class="form-control" required>
+          </div>
+              <div class="form-group">
+            <label>Odpowiedź C</label>
+            <input type="text" name="OdpC" id="OdpC" class="form-control" required>
+          </div>
+           <div class="form-group">
+            <label>Odpowiedź D</label>
+            <input type="text" name="OdpD" id="OdpD" class="form-control" required>
+          </div>
+            <div class="form-group">
+            <label>Poprwana odpowiedź</label>
+            <select  name="PoprawnaOdp" id="PoprawnaOdp" class="form-control">
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+            </select>
+          </div> 
         </div>
         <div class="modal-footer">
           <input type="button" id="closemodal" class="btn btn-default" data-dismiss="modal" value="Cancel">
-          <input type="submit" class="btn btn-success" value="Add">
+          <input type="submit" class="btn btn-success" value="Dodaj">
         </div>
       </form>
     </div>
   </div>
 </div>
 
-<!-- Edit Modal HTML -->
 <script>
 $(document).on('click', '#closemodal', function(e) {
   e.preventDefault();
@@ -124,7 +155,6 @@ $(document).on('click', '#adde', function(e) {
     </div>
   </div>
 </div>
-<!-- Delete Modal HTML -->
 <div id="deleteEmployeeModal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">

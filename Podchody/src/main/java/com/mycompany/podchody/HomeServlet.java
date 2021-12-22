@@ -7,14 +7,6 @@ package com.mycompany.podchody;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,40 +16,21 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Perfectamthew
  */
-public class TaskServlet extends HttpServlet {
-   String connectionURL = "jdbc:mysql://localhost:3308/podchody?autoReconnect=true&useSSL=false";
-   Connection con = null;
-   ArrayList<Tasks> tasks = new ArrayList<>();
-String EXAMID;
+public class HomeServlet extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        if(!tasks.isEmpty()){
-            tasks.clear();
-        }
-        EXAMID = request.getParameter("id");
-        request.setAttribute("IDOFEXAM", EXAMID);
-        String SQL = "SELECT * FROM tasks WHERE IDTestu = ?";
-        try {    
-               Class.forName("com.mysql.cj.jdbc.Driver");
-           } catch (ClassNotFoundException ex) {
-           }
-           try {
-               con = DriverManager.getConnection(connectionURL, "root", "root");
-           } catch (SQLException ex) {
-           }     
-       try {
-           PreparedStatement st = con.prepareStatement(SQL);
-           st.setInt(1, Integer.parseInt(EXAMID));
-           ResultSet rs = st.executeQuery();
-           while(rs.next()){
-               tasks.add(new Tasks(rs.getInt("ID"),Integer.parseInt(EXAMID),rs.getString("Tresc"),rs.getString("OdpA"),rs.getString("OdpB"),rs.getString("OdpC"),rs.getString("OdpD"),rs.getString("PoprawanaOdp")));
-           }
-       } catch (SQLException ex) {
-           Logger.getLogger(TaskServlet.class.getName()).log(Level.SEVERE, null, ex);
-       }
-       request.setAttribute("taskslist", tasks);
-       request.getRequestDispatcher("/examlogic.jsp").forward(request, response); 
+   request.getRequestDispatcher("/index.jsp").forward(request, response);   
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
