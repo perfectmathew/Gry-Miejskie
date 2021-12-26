@@ -105,7 +105,7 @@
     <div class="table-title">
       <div class="row">
         <div class="col-sm-6">
-          <h2><%= gamename %>/ <b>Testy</b></h2>
+            <h2><a href="g?id=<%= gameid %>"><%= gamename %></a>/ <b>Testy</b></h2>
         </div>
         <div class="col-sm-6">
           <a id="adde" class="btn btn-success" data-toggle="modal"><i class="fa fa-paperclip">&#xE147;</i> <span>Przypisz test</span></a>
@@ -132,7 +132,7 @@
           <td><%= exam.getSzer() %></td>
           <td><%= exam.getWys() %></td>
            <td>
-            <a  class="edit" data-toggle="modal"><i class="fa fa-pencil-square" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+               <a href="e?id=<%= exam.getID() %>" class="edit" data-toggle="modal"><i class="fa fa-pencil-square" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
             <a  class="delete" data-toggle="modal"><i class="fa fa-trash" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
           </td>
         </tr>

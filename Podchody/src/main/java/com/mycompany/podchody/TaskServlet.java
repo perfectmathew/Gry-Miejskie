@@ -51,7 +51,7 @@ String EXAMID;
            st.setInt(1, Integer.parseInt(EXAMID));
            ResultSet rs = st.executeQuery();
            while(rs.next()){
-               tasks.add(new Tasks(rs.getInt("ID"),Integer.parseInt(EXAMID),rs.getString("Tresc"),rs.getString("OdpA"),rs.getString("OdpB"),rs.getString("OdpC"),rs.getString("OdpD"),rs.getString("PoprawanaOdp")));
+               tasks.add(new Tasks(rs.getInt("ID"),Integer.parseInt(EXAMID),rs.getString("Tresc"),rs.getString("OdpA"),rs.getString("OdpB"),rs.getString("OdpC"),rs.getString("OdpD"),rs.getString("PoprawnaOdp")));
            }
        } catch (SQLException ex) {
            Logger.getLogger(TaskServlet.class.getName()).log(Level.SEVERE, null, ex);

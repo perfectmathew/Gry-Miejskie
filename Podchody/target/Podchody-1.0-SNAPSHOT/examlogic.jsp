@@ -21,7 +21,7 @@
     <div class="table-title">
       <div class="row">
         <div class="col-sm-6">
-          <h2>TEST / <b>Pytania</b></h2>
+            <h2><a href="exams">Testy </a> / <b>Pytania</b></h2>
         </div>
         <div class="col-sm-6">
           <a id="adde"  class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Dodaj nowe pytanie</span></a>
@@ -53,8 +53,12 @@
           <td><%= task.getPoprawanaOdp() %></td>
           <td>
               <a class="edit" data-toggle="modal"><i class="fa fa-pencil-square" data-toggle="tooltip" title="Edit"></i></a>
-            <a  class="delete" data-toggle="modal"><i class="fa fa-trash" data-toggle="tooltip" title="Delete"></i></a>
-          </td>
+              <form method="post" action="efunction?type=deletequestion">
+            <input type="hidden" name="examid" id="examid" value = "<%= examid %>">
+            <input type="hidden" name="taskid" id="taskid" value="<%= task.getID() %>">
+            <button type="submit"  class="delete" data-toggle="modal"><i class="fa fa-trash" id="delTask" data-toggle="tooltip" title="Usuń"></i></button>
+              </form>
+              </td>
         </tr>
         <% } %>
       </tbody>
@@ -75,6 +79,10 @@
           <div class="form-group">
             <label>Tresc</label>
             <input type="text" class="form-control" name="tresc" id="tresc" required>
+          </div>
+          <div class="form-group">
+            <label>Link do obrazu</label>
+            <input type="text" class="form-control" name="obraz" id="obraz">
           </div>
           <div class="form-group">
             <label>Odpowiedź A</label>
@@ -114,7 +122,7 @@
 <script>
 $(document).on('click', '#closemodal', function(e) {
   e.preventDefault();
-  $('#addExam').modal('hide'); 
+  $('#addExam').modal('hide'); \
 });
 $(document).on('click', '#adde', function(e) {
   e.preventDefault();
@@ -150,26 +158,6 @@ $(document).on('click', '#adde', function(e) {
         <div class="modal-footer">
           <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
           <input type="submit" class="btn btn-info" value="Save">
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-<div id="deleteEmployeeModal" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form>
-        <div class="modal-header">
-          <h4 class="modal-title">Usunięcie zadania</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        </div>
-        <div class="modal-body">
-          <p>Czy napewno chcesz usunąć to zadanie?</p>
-          <p class="text-warning"><small>Ta akcja nie będzie możliwa do cofnięcia.</small></p>
-        </div>
-        <div class="modal-footer">
-          <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-          <input type="submit" class="btn btn-danger" value="Delete">
         </div>
       </form>
     </div>

@@ -29,7 +29,9 @@ public class ExamFunction extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String SQLp = "INSERT INTO tasks (Tresc,Obraz,OdpA,OdpB,OdpC,OdpD,PoprawnaOdp,IDTestu) VALUES (?,?,?,?,?,?,?,?)";
         String SQL = "INSERT INTO exams (Nazwa, ProgZaliczenia) VALUES (?,?)";
+        String SQLd = "DELETE FROM tasks WHERE ID = ?";
         if(request.getParameter("examid")!=null)
         {
            EXAMID = Integer.parseInt(request.getParameter("examid"));
@@ -60,12 +62,54 @@ public class ExamFunction extends HttpServlet {
                  Logger.getLogger(ExamFunction.class.getName()).log(Level.SEVERE, null, ex);
              }   
                  }
+             request.getRequestDispatcher("exams").forward(request, response);   
                      break;
              case "addquestion":
+                 String tresc = request.getParameter("tresc");
+                 String OdpA = request.getParameter("OdpA");
+                 String OdpB = request.getParameter("OdpB");
+                 String OdpC = request.getParameter("OdpC");
+                 String OdpD = request.getParameter("OdpD"); 
+                 String PoprawnaOdp = request.getParameter("PoprawnaOdp");
+                 String obraz = "";
+                 if(request.getParameter("obraz")!=null){
+                     obraz = request.getParameter("obraz");
+                 }else{
+                     obraz ="";
+                 }
+                 {
+             try {
+                 PreparedStatement stu = con.prepareStatement(SQLp);
+                 stu.setString(1, tresc);
+                 stu.setString(2, obraz);
+                 stu.setString(3, OdpA);
+                 stu.setString(4, OdpB);
+                 stu.setString(5, OdpC);
+                 stu.setString(6, OdpD);
+                 stu.setString(7, PoprawnaOdp);
+                 stu.setInt(8,EXAMID);
+                 stu.execute();
+             } catch (SQLException ex) {
+                 Logger.getLogger(ExamFunction.class.getName()).log(Level.SEVERE, null, ex);
+             }
+                 }
+         request.getRequestDispatcher("e?id="+EXAMID).forward(request, response);   
                  break;
              case "editquestion":
                  break;
              case "deletequestion":
+             {
+                 String idtask = request.getParameter("taskid");
+             try {
+                 PreparedStatement std = con.prepareStatement(SQLd);
+                 std.setInt(1, Integer.parseInt(idtask));
+                 std.executeUpdate();
+             request.getRequestDispatcher("e?id="+EXAMID).forward(request, response);   
+             } catch (SQLException ex) {
+                 Logger.getLogger(ExamFunction.class.getName()).log(Level.SEVERE, null, ex);
+             }
+                 
+             }
                  break;
              default:
                  break;
