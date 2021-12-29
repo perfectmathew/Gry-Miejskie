@@ -4,6 +4,7 @@
     Author     : Perfectamthew
 --%>
 
+<%@page import="com.mycompany.podchody.GameActivity"%>
 <%@page import="com.mycompany.podchody.Exams"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.mycompany.podchody.Players"%>
@@ -56,8 +57,11 @@
           <td><%=  player.getNazwisko() %></td>
                 <td><%=  player.getKod() %></td>
            <td>
-            <a  class="edit" data-toggle="modal"><i class="fa fa-pencil-square" data-toggle="tooltip" title="Edit"></i></a>
-            <a  class="delete" data-toggle="modal"><i class="fa fa-trash" data-toggle="tooltip" title="Delete"></i></a>
+                  <form action="function?type=deleteplayer" method="post">
+                      <input type="hidden" name="gameid" id="gameid" value="<%= gameid %>" />
+            <input type="hidden" name="usrid" id="usrid" value="<%= player.getID() %>" />
+            <button type="submit" class="delete" data-toggle="modal"><i class="fa fa-trash" data-toggle="tooltip" title="Delete"></i></button>
+                  </form>
           </td>
         </tr>
         <% } %>
@@ -73,9 +77,6 @@
         <div class="col-sm-6">
             <h2><a href="g?id=<%= gameid %>"><%= gamename %> </a>/ <b>Aktywnosc</b></h2>
         </div>
-        <div class="col-sm-6">
-          <a  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Dodaj nowy test</span></a>
-        </div>
       </div>
     </div>
     <table class="table table-striped table-hover">
@@ -83,18 +84,23 @@
         <tr>
           <th>Gracz</th>
           <th>Aktualny Test</th>
+         <th>Czas rozpoczęcia</th>
           <th>AktulanaPozX</th>
           <th>AktulanaPozY</th>
         </tr>
       </thead>
       <tbody>
+                 <%
+        ArrayList<GameActivity> activitylist = (ArrayList<GameActivity>) request.getAttribute("gameActivty");
+             for(GameActivity activity : activitylist){   %> 
         <tr>
-          <td>Thomas Hardy</td>
-          <td>thomashardy@mail.com</td>
-          <td>89 Chiaroscuro Rd, Portland, USA</td>
-          <td>89 Chiaroscuro Rd, Portland, USA</td>
-          <td>89 Chiaroscuro Rd, Portland, USA</td>
+            <td><%= activity.getImie() + " " + activity.getNazwisko() %></td>
+          <td><%= activity.getNazwa() %></td>
+          <td><%= activity.getData() %></td>
+          <td><%= activity.getPozX() %></td>
+          <td><%= activity.getPozY() %></td>
         </tr>
+        <% } %>
       </tbody>
     </table>
   </div>
@@ -132,9 +138,16 @@
           <td><%= exam.getSzer() %></td>
           <td><%= exam.getWys() %></td>
            <td>
-               <a href="e?id=<%= exam.getID() %>" class="edit" data-toggle="modal"><i class="fa fa-pencil-square" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-            <a  class="delete" data-toggle="modal"><i class="fa fa-trash" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-          </td>
+               <form action="e" method="get">
+                   <input type="hidden" id="id" name="id" value="<%= exam.getID() %>">
+               <button  class="edit" data-toggle="modal"><i class="fa fa-pencil-square" data-toggle="tooltip" title="Edit"></i></button>
+               </form>
+               <form action="function?type=deleteexam" method="post">
+                   <input type="hidden" name="gameid" id="gameid" value="<%= gameid %>" />
+               <input type="hidden" name="idtestu" id="idtestu" value="<%= exam.getID() %>"/>
+               <button typ="submit"  class="delete" data-toggle="modal"><i class="fa fa-trash" data-toggle="tooltip" title="Delete"></i></button>
+               </form>
+               </td>
         </tr>
         <% } %> 
       </tbody>
@@ -146,7 +159,7 @@
 <div class="cards-list">
 <a href="<%= request.getScheme() + "://" + request.getServerName() +  ":" +   request.getServerPort() + "/Podchody/g" + "?" +   request.getQueryString() + "&action=exams" %>">
 <div class="card 1">
-  <div class="card_image"> <img src="https://i.redd.it/b3esnz5ra34y.jpg" /> </div>
+  <div class="card_image"> <img src="https://i.imgur.com/BnfX0Pm.png" /> </div>
   <div class="card_title title-white">
     <p>Testy</p>
   </div>
@@ -155,16 +168,16 @@
 <a href="<%= request.getScheme() + "://" + request.getServerName() +  ":" +   request.getServerPort() + "/Podchody/g" + "?" +   request.getQueryString() + "&action=users" %>">
 <div class="card 2">
   <div class="card_image">
-    <img src="https://cdn.blackmilkclothing.com/media/wysiwyg/Wallpapers/PhoneWallpapers_FloralCoral.jpg" />
+    <img src="https://i.imgur.com/8UuTQwL.png" />
    </div>
   <div class="card_title title-white">
     <p>Gracze</p>
   </div>
 </div></a>
-<a href="games">
+<a href="<%= request.getScheme() + "://" + request.getServerName() +  ":" +   request.getServerPort() + "/Podchody/g" + "?" +   request.getQueryString() + "&action=activity" %>">
 <div class="card 3">
   <div class="card_image">
-    <img src="https://cdn.blackmilkclothing.com/media/wysiwyg/Wallpapers/PhoneWallpapers_FloralCoral.jpg" />
+    <img src="https://i.imgur.com/1qllhLq.png" />
    </div>
   <div class="card_title title-white">
     <p>Aktywność</p>

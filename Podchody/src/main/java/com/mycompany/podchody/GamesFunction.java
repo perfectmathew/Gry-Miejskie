@@ -51,14 +51,27 @@ int GAMEID;
                         st.setString(3, kod);
                         st.setInt(4, GAMEID);
                         st.execute();
-                        request.getRequestDispatcher("g?id="+GAMEID+"&action=users").forward(request, response);
+                   
                     } catch (SQLException ex) {
                         Logger.getLogger(GamesFunction.class.getName()).log(Level.SEVERE, null, ex);
-                    }   break;
-                case "edituser":
+                    } 
+            request.getRequestDispatcher("g?id="+GAMEID+"&action=users").forward(request, response);
                     break;
-                case "deleteuser":
-                    break;
+                case "deleteplayer":
+                    int iduser = Integer.parseInt(request.getParameter("usrid"));
+                    String SQLplayer = "DELETE FROM players WHERE ID = ?";
+                    {
+                try {
+                    PreparedStatement delus = con.prepareStatement(SQLplayer);
+                    delus.setInt(1, iduser);
+                    delus.executeUpdate();
+                } catch (SQLException ex) {
+                    Logger.getLogger(GamesFunction.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                    }
+                          request.getRequestDispatcher("g?id="+GAMEID+"&action=users").forward(request, response);
+                   
+                          break;
                 case "addexam":
                     String szerokosc = request.getParameter("szerokosc");
                     String wysokosc = request.getParameter("wysokosc");
@@ -78,10 +91,23 @@ int GAMEID;
                     }
                 }
                     break;
-
                 case "deleteexam":
-                    break;
-                case "editexam":
+                 String examdSQL = "UPDATE exams SET IDGame = ?, SzerGeograficzna = ?, WysGeograficzna = ? WHERE ID = ?";   
+                 int idexam = Integer.parseInt(request.getParameter("idtestu"));
+                 {
+                try {
+                    PreparedStatement est = con.prepareStatement(examdSQL);
+                    est.setInt(1, 0);
+                    est.setString(2, "xxx");
+                    est.setString(3, "xxx");
+                    est.setInt(4, idexam);
+                    est.executeUpdate();
+                    request.getRequestDispatcher("g?id="+GAMEID+"&action=exams").forward(request, response);
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(GamesFunction.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                 }
                     break;
                 default:
                     break;

@@ -24,7 +24,7 @@
             <h2><a href="exams">Testy </a> / <b>Pytania</b></h2>
         </div>
         <div class="col-sm-6">
-          <a id="adde"  class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Dodaj nowe pytanie</span></a>
+          <a id="addex" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Dodaj nowe pytanie</span></a>
         </div>
       </div>
     </div>
@@ -122,10 +122,11 @@
 <script>
 $(document).on('click', '#closemodal', function(e) {
   e.preventDefault();
-  $('#addExam').modal('hide'); \
+  $('#addExam').modal('hide'); 
 });
-$(document).on('click', '#adde', function(e) {
+$(document).on('click', '#addex', function(e) {
   e.preventDefault();
+
   $('#addExam').modal('show');
 });
  </script>

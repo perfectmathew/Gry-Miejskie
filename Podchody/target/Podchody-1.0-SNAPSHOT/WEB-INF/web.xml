@@ -32,6 +32,10 @@
         <servlet-name>ExamFunction</servlet-name>
         <servlet-class>com.mycompany.podchody.ExamFunction</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FakeJson</servlet-name>
+        <servlet-class>com.mycompany.podchody.FakeJson</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TaskServlet</servlet-name>
         <url-pattern>/e</url-pattern>
@@ -66,6 +70,10 @@
     <servlet-mapping>
         <servlet-name>ExamFunction</servlet-name>
         <url-pattern>/efunction</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FakeJson</servlet-name>
+        <url-pattern>/json</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

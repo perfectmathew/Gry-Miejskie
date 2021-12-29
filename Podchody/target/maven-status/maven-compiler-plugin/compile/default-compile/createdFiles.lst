@@ -4,6 +4,8 @@ com\mycompany\podchody\Tasks.class
 com\mycompany\podchody\GameDetail.class
 com\mycompany\podchody\GamesServlet.class
 com\mycompany\podchody\EmxamsServlet.class
+com\mycompany\podchody\ExamFunction.class
+com\mycompany\podchody\GameActivity.class
 com\mycompany\podchody\Games.class
 com\mycompany\podchody\HomeServlet.class
 com\mycompany\podchody\Players.class
@@ -11,3 +13,4 @@ com\mycompany\podchody\resources\JavaEE8Resource.class
 com\mycompany\podchody\TaskServlet.class
 com\mycompany\podchody\AddGame.class
 com\mycompany\podchody\GamesFunction.class
+com\mycompany\podchody\FakeJson.class

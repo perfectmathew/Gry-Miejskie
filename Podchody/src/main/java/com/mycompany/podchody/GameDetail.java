@@ -35,6 +35,7 @@ String GAMENAME;
 ResultSet rs = null;     
 String SQLCheck = "SELECT * FROM Games WHERE ID = ?";
     ArrayList<Players> infograczy = new ArrayList<>();
+    ArrayList<GameActivity> informacjeogrze = new ArrayList<>();
     ArrayList<Exams> infotesty = new ArrayList<>();
     ArrayList<Exams> wszystkietesty = new ArrayList<>();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -48,6 +49,8 @@ String SQLCheck = "SELECT * FROM Games WHERE ID = ?";
             infotesty.clear();
         }else if(!wszystkietesty.isEmpty()){
             wszystkietesty.clear();
+        }else if(!informacjeogrze.isEmpty()){
+           informacjeogrze.clear();
         }
         found =false;
         response.setContentType("text/html;charset=UTF-8");
@@ -120,8 +123,25 @@ String SQLCheck = "SELECT * FROM Games WHERE ID = ?";
                 request.setAttribute("gameExams",infotesty);
                 request.getRequestDispatcher("/gamelogic.jsp").forward(request, response);
           }else if(request.getParameter("action").equals("activity")){
-          
-          request.setAttribute("gameActivty",infograczy);    
+              String someSQl = "SELECT * FROM GameActivity INNER JOIN Games ON (GameActivity.Gra = Games.ID) INNER JOIN players ON (GameActivity.Gracz = players.ID) INNER JOIN exams ON (GameActivity.Test = exams.ID) INNER JOIN Position ON (GameActivity.Gra = Position.Gra) WHERE GameActivity.Gra = ?";
+              try {
+                  PreparedStatement some = con.prepareStatement(someSQl);
+                  some.setInt(1, Integer.parseInt(GAMEID));
+                  ResultSet someactivity = some.executeQuery();
+                  while(someactivity.next()){
+                      informacjeogrze.add(
+                              new GameActivity(someactivity.getInt("GameActivity.ID"),someactivity.getString("players.Imie"),
+                              someactivity.getString("players.Nazwisko"),someactivity.getInt("GameActivity.Gracz"),someactivity.getInt("GameActivity.Gra"),
+                              someactivity.getString("GameActivity.CzasRozpoczecia"), someactivity.getInt("GameActivity.Test"),
+                              someactivity.getString("exams.Nazwa"),
+                                 someactivity.getString("Position.PozX"), someactivity.getString("Position.PozY"))
+                      );
+                  }
+              } catch (SQLException ex) {
+                  Logger.getLogger(GameDetail.class.getName()).log(Level.SEVERE, null, ex);
+              }
+              
+           request.setAttribute("gameActivty",informacjeogrze);    
           request.getRequestDispatcher("/gamelogic.jsp").forward(request, response);  
           }else{
            request.getRequestDispatcher("/gamelogic.jsp").forward(request, response); 

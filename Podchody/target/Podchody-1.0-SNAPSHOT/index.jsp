@@ -15,7 +15,7 @@
 <div class="cards-list">
     <a href="exams">
 <div class="card 1">
-  <div class="card_image"> <img src="https://i.redd.it/b3esnz5ra34y.jpg" /> </div>
+  <div class="card_image"> <img src="https://i.imgur.com/HRuR4f1.png" /> </div>
   <div class="card_title title-white">
     <p>Testy</p>
   </div>
@@ -24,7 +24,7 @@
 <a href="games">
 <div class="card 2">
   <div class="card_image">
-    <img src="https://cdn.blackmilkclothing.com/media/wysiwyg/Wallpapers/PhoneWallpapers_FloralCoral.jpg" />
+    <img src="https://i.imgur.com/YWOJ3zX.png" />
    </div>
   <div class="card_title title-white">
     <p>Gry</p>
