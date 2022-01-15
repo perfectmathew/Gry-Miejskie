@@ -18,10 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Perfectamthew
- */
+
 public class ExamFunction extends HttpServlet {
    String connectionURL = "jdbc:mysql://localhost:3308/podchody?autoReconnect=true&useSSL=false";
    Connection con = null;
@@ -29,8 +26,9 @@ public class ExamFunction extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String SQLP = "INSERT INTO tasks (Tresc,Obraz,OdpA,OdpB,OdpC,OdpD,PoprawnaOdp) VALUES (?,?,?,?,?,?,?)";
         String SQLp = "INSERT INTO tasks (Tresc,Obraz,OdpA,OdpB,OdpC,OdpD,PoprawnaOdp,IDTestu) VALUES (?,?,?,?,?,?,?,?)";
-        String SQL = "INSERT INTO exams (Nazwa, ProgZaliczenia) VALUES (?,?)";
+        String SQL = "INSERT INTO exams (Nazwa, ProgZaliczenia, Podpowiedz) VALUES (?,?,?)";
         String SQLd = "DELETE FROM tasks WHERE ID = ?";
         if(request.getParameter("examid")!=null)
         {
@@ -50,6 +48,7 @@ public class ExamFunction extends HttpServlet {
          {
              case "addexam":
                  String nazwa = request.getParameter("name");
+                 String podpowiedz = request.getParameter("podpowiedz");
                  Float progzaliczenia = Float.parseFloat(request.getParameter("prog"));
                  {
                      
@@ -57,6 +56,7 @@ public class ExamFunction extends HttpServlet {
                  PreparedStatement st = con.prepareStatement(SQL);
                  st.setString(1, nazwa);
                  st.setFloat(2, progzaliczenia);
+                 st.setString(3, podpowiedz);
                  st.execute();
              } catch (SQLException ex) {
                  Logger.getLogger(ExamFunction.class.getName()).log(Level.SEVERE, null, ex);
@@ -64,6 +64,36 @@ public class ExamFunction extends HttpServlet {
                  }
              request.getRequestDispatcher("exams").forward(request, response);   
                      break;
+             case "addque":
+             {
+                 String tresc = request.getParameter("tresc");
+                 String OdpA = request.getParameter("OdpA");
+                 String OdpB = request.getParameter("OdpB");
+                 String OdpC = request.getParameter("OdpC");
+                 String OdpD = request.getParameter("OdpD"); 
+                 String PoprawnaOdp = request.getParameter("PoprawnaOdp");
+                 String obraz = "";
+                 if(request.getParameter("obraz")!=null){
+                     obraz = request.getParameter("obraz");
+                 }else{
+                     obraz ="NULL";
+                 }
+                  try {
+                 PreparedStatement stu = con.prepareStatement(SQLP);
+                 stu.setString(1, tresc);
+                 stu.setString(2, obraz);
+                 stu.setString(3, OdpA);
+                 stu.setString(4, OdpB);
+                 stu.setString(5, OdpC);
+                 stu.setString(6, OdpD);
+                 stu.setString(7, PoprawnaOdp);
+                 stu.execute();
+             } catch (SQLException ex) {
+                 Logger.getLogger(ExamFunction.class.getName()).log(Level.SEVERE, null, ex);
+             }
+             }
+                      request.getRequestDispatcher("questions").forward(request, response);   
+                 break;
              case "addquestion":
                  String tresc = request.getParameter("tresc");
                  String OdpA = request.getParameter("OdpA");
@@ -75,7 +105,7 @@ public class ExamFunction extends HttpServlet {
                  if(request.getParameter("obraz")!=null){
                      obraz = request.getParameter("obraz");
                  }else{
-                     obraz ="";
+                     obraz ="NULL";
                  }
                  {
              try {
@@ -95,7 +125,54 @@ public class ExamFunction extends HttpServlet {
                  }
          request.getRequestDispatcher("e?id="+EXAMID).forward(request, response);   
                  break;
+             case "conquestion":
+                 String pytanie = request.getParameter("idpytania");
+                 {
+                     PreparedStatement stw;
+                 try {
+                     String sdxwsd = "UPDATE tasks SET IDTestu = ? WHERE ID = ?";
+                     stw = con .prepareStatement(sdxwsd);
+                     stw.setInt(1, EXAMID);
+                     stw.setInt(2,Integer.parseInt(pytanie));
+                     stw.execute();
+                 } catch (SQLException ex) {
+                     Logger.getLogger(ExamFunction.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+                 }
+                 request.getRequestDispatcher("e?id="+EXAMID).forward(request, response);   
+                 break;
+
              case "editquestion":
+                 String sqlu = "UPDATE tasks SET Tresc = ?, Obraz = ?, OdpA = ?, OdpB = ?, OdpC = ?, OdpD = ?, PoprawnaOdp = ? WHERE Tresc = ?";
+                 String tresce = request.getParameter("tresce");
+                 String OdpAe = request.getParameter("OdpAe");
+                 String OdpBe = request.getParameter("OdpBe");
+                 String OdpCe = request.getParameter("OdpCe");
+                 String OdpDe = request.getParameter("OdpDe"); 
+                 String PoprawnaOdpe = request.getParameter("PoprawnaOdpe");
+                 String obraze = "";
+                 if(request.getParameter("obraze")!=null){
+                     obraze = request.getParameter("obraze");
+                 }else{
+                     obraze ="NULL";
+                 }
+                 {
+             try {
+                 PreparedStatement stupdate = con.prepareStatement(sqlu);
+                 stupdate.setString(1, tresce);
+                 stupdate.setString(2, obraze);
+                 stupdate.setString(3, OdpAe);
+                 stupdate.setString(4, OdpBe);
+                 stupdate.setString(5, OdpCe);
+                 stupdate.setString(6, OdpDe);
+                 stupdate.setString(7, PoprawnaOdpe);
+                 stupdate.setString(8,tresce);
+                 stupdate.executeUpdate();
+             } catch (SQLException ex) {
+                 Logger.getLogger(ExamFunction.class.getName()).log(Level.SEVERE, null, ex);
+             }
+                 }
+           request.getRequestDispatcher("e?id="+EXAMID).forward(request, response);   
                  break;
              case "deletequestion":
              {

@@ -40,16 +40,12 @@ int GAMEID;
         if(request.getParameter("type")!=null){
             switch (request.getParameter("type")) {
                 case "adduser":
-                    String imie = request.getParameter("imie");
-                    String nazwisko = request.getParameter("nazwisko");
                     String kod = request.getParameter("code");
-                    String SQL = "INSERT INTO players (Imie,Nazwisko,KodDstepu,IDGame) VALUES (?,?,?,?)";
+                    String SQL = "INSERT INTO players (KodDstepu,IDGame) VALUES (?,?)";
                     try {
                         PreparedStatement st = con.prepareStatement(SQL);
-                        st.setString(1, imie);
-                        st.setString(2, nazwisko);
-                        st.setString(3, kod);
-                        st.setInt(4, GAMEID);
+                        st.setString(1, kod);
+                        st.setInt(2, GAMEID);
                         st.execute();
                    
                     } catch (SQLException ex) {

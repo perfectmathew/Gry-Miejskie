@@ -54,7 +54,7 @@ public class EmxamsServlet extends HttpServlet {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(examsSQL);
             while(rs.next()){
-                exams.add(new Exams(rs.getInt("ID"),Integer.parseInt(getNum(rs.getString("ID"))),rs.getString("Nazwa"),rs.getFloat("ProgZaliczenia")));
+                exams.add(new Exams(rs.getInt("ID"),Integer.parseInt(getNum(rs.getString("ID"))),rs.getString("Nazwa"),rs.getFloat("ProgZaliczenia"),rs.getString("Podpowiedz")));
             }
         } catch (SQLException ex) {
            Logger.getLogger(EmxamsServlet.class.getName()).log(Level.SEVERE, null, ex);

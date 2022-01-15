@@ -42,8 +42,6 @@
     <table class="table table-striped table-hover">
       <thead>
         <tr>
-          <th>Imie</th>
-          <th>Nazwisko</th>
           <th>Kod Dostępu</th>
           <th>Akcja</th>
         </tr>
@@ -53,8 +51,6 @@
         ArrayList<Players> userslist = (ArrayList<Players>) request.getAttribute("gameUsers");
              for(Players player : userslist){   %>
         <tr>
-          <td><%=  player.getImie() %></td>
-          <td><%=  player.getNazwisko() %></td>
                 <td><%=  player.getKod() %></td>
            <td>
                   <form action="function?type=deleteplayer" method="post">
@@ -94,7 +90,7 @@
         ArrayList<GameActivity> activitylist = (ArrayList<GameActivity>) request.getAttribute("gameActivty");
              for(GameActivity activity : activitylist){   %> 
         <tr>
-            <td><%= activity.getImie() + " " + activity.getNazwisko() %></td>
+            <td><%= activity.getImie()%></td>
           <td><%= activity.getNazwa() %></td>
           <td><%= activity.getData() %></td>
           <td><%= activity.getPozX() %></td>
@@ -196,14 +192,6 @@
         </div>
         <div class="modal-body">
             <input type="hidden" class="form-control" id="gameid" name="gameid" value="<%= gameid %>" required>
-          <div class="form-group">
-            <label>Imie</label>
-            <input type="text" class="form-control" id="imie" name="imie" required>
-          </div>
-          <div class="form-group">
-            <label>Nazwisko</label>
-            <input type="text" class="form-control" id="nazwisko" name="nazwisko" required>
-          </div>
           <div class="form-group">
             <label>Kod dostępu</label>
             <input type="text" class="form-control" pattern="[A-Za-z0-9]{6}" required id="code" name="code"> <button type="button" id="generate" class="btn-success"><i class="fa fa-random" aria-hidden="true"></i></button>

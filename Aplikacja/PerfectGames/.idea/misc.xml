@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Perfectamthew/Documents/GitHub/Podchody/Gry-Miejskie/Aplikacja/PerfectGames/app/src/main/res/layout/activity_main.xml" value="0.16869300911854104" />
+        <entry key="..\:/Users/Perfectamthew/Documents/GitHub/Podchody/Gry-Miejskie/Aplikacja/PerfectGames/app/src/main/res/drawable/loader.xml" value="0.1824074074074074" />
+        <entry key="..\:/Users/Perfectamthew/Documents/GitHub/Podchody/Gry-Miejskie/Aplikacja/PerfectGames/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/Users/Perfectamthew/Documents/GitHub/Podchody/Gry-Miejskie/Aplikacja/PerfectGames/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/Users/Perfectamthew/Documents/GitHub/Podchody/Gry-Miejskie/Aplikacja/PerfectGames/app/src/main/res/layout/game_dialog.xml" value="0.25" />
       </map>
     </option>
   </component>

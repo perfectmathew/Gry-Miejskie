@@ -36,6 +36,10 @@
         <servlet-name>FakeJson</servlet-name>
         <servlet-class>com.mycompany.podchody.FakeJson</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QuestionServlet</servlet-name>
+        <servlet-class>com.mycompany.podchody.QuestionServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TaskServlet</servlet-name>
         <url-pattern>/e</url-pattern>
@@ -74,6 +78,10 @@
     <servlet-mapping>
         <servlet-name>FakeJson</servlet-name>
         <url-pattern>/json</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuestionServlet</servlet-name>
+        <url-pattern>/questions</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

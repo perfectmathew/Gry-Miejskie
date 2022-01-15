@@ -32,6 +32,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation files('libs\\jboss-common-jdbc-wrapper.jar')
     implementation files('libs\\mysql-connector-java-5.1.46.jar')
     testImplementation 'junit:junit:4.+'

@@ -13,23 +13,42 @@ public class Tasks {
     private int ID;
     private int IDExam;
     private String Tresc;
+    private String Obraz;
     private String OdpA;
     private String OdpB;
     private String OdpC;
     private String OdpD;
     private String PoprawanaOdp;
     
-    public Tasks(int _id, int _idexam, String _tresc, String _odpa, String _odpb, String _odpc, String _odpd, String _poprawnaodp){
+    public Tasks(int _id, int _idexam, String _tresc,String _obraz ,String _odpa, String _odpb, String _odpc, String _odpd, String _poprawnaodp){
         ID = _id;
         IDExam = _idexam;
         Tresc = _tresc;
+        Obraz = _obraz;
         OdpA = _odpa;
         OdpB = _odpb;
         OdpC = _odpc;
         OdpD = _odpd;
         PoprawanaOdp = _poprawnaodp;
     }
-    
+      public Tasks(int _id,String _tresc,String _obraz ,String _odpa, String _odpb, String _odpc, String _odpd, String _poprawnaodp){
+        ID = _id;
+        Tresc = _tresc;
+        Obraz = _obraz;
+        OdpA = _odpa;
+        OdpB = _odpb;
+        OdpC = _odpc;
+        OdpD = _odpd;
+        PoprawanaOdp = _poprawnaodp;
+    }
+    public Tasks(int _id, int _idexam, String _tresc){
+        ID = _id;
+        IDExam = _idexam;
+        Tresc = _tresc;
+    }
+    public String getObraz(){
+        return Obraz;
+    }
     public int getID(){
         return  ID;
     }

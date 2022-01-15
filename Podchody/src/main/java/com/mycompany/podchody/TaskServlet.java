@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,12 +29,17 @@ public class TaskServlet extends HttpServlet {
    String connectionURL = "jdbc:mysql://localhost:3308/podchody?autoReconnect=true&useSSL=false";
    Connection con = null;
    ArrayList<Tasks> tasks = new ArrayList<>();
+   ArrayList<Tasks> alltasks = new ArrayList<>();
 String EXAMID;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         if(!tasks.isEmpty()){
             tasks.clear();
+        }
+        if(!alltasks.isEmpty()){
+            alltasks.clear();
+            request.removeAttribute("alltasklist");
         }
         EXAMID = request.getParameter("id");
         request.setAttribute("IDOFEXAM", EXAMID);
@@ -51,11 +57,17 @@ String EXAMID;
            st.setInt(1, Integer.parseInt(EXAMID));
            ResultSet rs = st.executeQuery();
            while(rs.next()){
-               tasks.add(new Tasks(rs.getInt("ID"),Integer.parseInt(EXAMID),rs.getString("Tresc"),rs.getString("OdpA"),rs.getString("OdpB"),rs.getString("OdpC"),rs.getString("OdpD"),rs.getString("PoprawnaOdp")));
+               tasks.add(new Tasks(rs.getInt("ID"),Integer.parseInt(EXAMID),rs.getString("Tresc"),rs.getString("Obraz"),rs.getString("OdpA"),rs.getString("OdpB"),rs.getString("OdpC"),rs.getString("OdpD"),rs.getString("PoprawnaOdp")));
+           }
+           Statement ts = con.createStatement();
+           ResultSet sr = ts.executeQuery("SELECT * FROM tasks");
+           while(sr.next()){
+               alltasks.add(new Tasks(sr.getInt("ID"),Integer.parseInt(EXAMID),sr.getString("Tresc")));
            }
        } catch (SQLException ex) {
            Logger.getLogger(TaskServlet.class.getName()).log(Level.SEVERE, null, ex);
        }
+       request.setAttribute("alltasklist", alltasks);
        request.setAttribute("taskslist", tasks);
        request.getRequestDispatcher("/examlogic.jsp").forward(request, response); 
     }

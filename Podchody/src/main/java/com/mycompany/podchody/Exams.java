@@ -17,6 +17,7 @@ public class Exams {
     private String SzerGeograficzna;
     private float ProgZaliczenia;
     private int iloscpytan;
+    private String Podpowiedz;
     
     public Exams(int _id, int _idgame, String _nazwa, String _WysGeograficzna, String _SzerGeograficzna, float _ProgZaliczenia){
         ID = _id;
@@ -39,11 +40,12 @@ public class Exams {
         ID = _id;
         Nazwa = _nazwa;
     }
-      public Exams(int _id,int _iloscpytan, String _nazwa, float _ProgZaliczenia){
+      public Exams(int _id,int _iloscpytan, String _nazwa, float _ProgZaliczenia, String _podpowiedz){
         ID = _id;
         Nazwa = _nazwa;
         iloscpytan = _iloscpytan;
         ProgZaliczenia = _ProgZaliczenia;
+        Podpowiedz = _podpowiedz;
     }
       public int getIlosc(){
           return iloscpytan;
@@ -65,5 +67,8 @@ public class Exams {
     }
     public float getProg(){
         return ProgZaliczenia;
+    }
+    public String getPodpowiedz(){
+        return Podpowiedz;
     }
 }
