@@ -12,6 +12,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -28,7 +32,7 @@ public class AddGame extends HttpServlet {
    Connection con = null;
    PreparedStatement st = null;
    ResultSet rs = null;
-   String SQL = "INSERT INTO Games (Nazwa, Kod, Obraz, Aktywna) VALUES (?,?,?,?)";
+   String SQL = "INSERT INTO Games (Nazwa, Kod, Obraz, Aktywna, Czas Startu, Czas Zakonczeinia) VALUES (?,?,?,?,?,?)";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             String Obraz = "";
@@ -42,6 +46,8 @@ public class AddGame extends HttpServlet {
            } catch (SQLException ex) {
            }
         String Nazwa = request.getParameter("nazwa");
+        String Start_date = request.getParameter("start_time");
+        String End_date = request.getParameter("end_time");
         String Kod = request.getParameter("kod");
         if(request.getParameter("obraz")!=null){
             Obraz = request.getParameter("obraz");
@@ -52,11 +58,17 @@ public class AddGame extends HttpServlet {
                  Obraz = "https://cdn.pixabay.com/photo/2021/09/07/07/11/game-console-6603120_960_720.jpg";
         }
        try {
+           
+           LocalDateTime dateTime = LocalDateTime.parse(Start_date);
+           DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+          
+      
            st = con.prepareStatement(SQL);
            st.setString(1, Nazwa);
            st.setString(2, Kod);
            st.setString(3, Obraz);
            st.setBoolean(4, true);
+          
            st.execute();
        } catch (SQLException ex) {
            Logger.getLogger(AddGame.class.getName()).log(Level.SEVERE, null, ex);

@@ -61,7 +61,6 @@ public class Login extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     try {
-
                         con = DriverManager.getConnection("jdbc:mysql://192.168.1.10:3308/podchody?autoReconnect=true&useSSL=false", "perfect", "root");
                         PreparedStatement st = con.prepareStatement("SELECT * FROM players INNER JOIN Games ON (players.IDGame = Games.ID) WHERE KodDstepu = ?");
                         st.setString(1,code.getText().toString());

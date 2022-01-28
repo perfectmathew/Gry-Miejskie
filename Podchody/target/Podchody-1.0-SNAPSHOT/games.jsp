@@ -68,6 +68,14 @@ $(document).on('click', '#addbtn', function(e) {
                 <input type="text" class="form-control" id="kod" name="kod" required>
               </div>
               <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Czas rozpoczecia:</label>
+                <input type="datetime-local" class="form-control" id="start_time" name="start_time" required>
+              </div>  
+               <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Czas zakonczenia:</label>
+                <input type="datetime-local" class="form-control" id="end_time" name="end_time" required>
+              </div> 
+              <div class="mb-3">
                 <label for="recipient-name" class="col-form-label">(Opcjonalne) Obraz:</label>
                 <input type="text" class="form-control" name="obraz" id="obraz">
               </div>
